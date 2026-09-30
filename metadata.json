@@ -1,0 +1,8 @@
+{
+  "name": "Midnight Express - Railway Reservation System",
+  "description": "High-speed rail transit booking platform, terminal wayfinding, live berth allocation, digital boarding passes, and DBMS reservation management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

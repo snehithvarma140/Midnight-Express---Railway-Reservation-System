@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+@layer utilities {
+  /* Train convoy animation and track elements */
+  .train-unit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    will-change: transform;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .loco-forward-cone {
+    background: radial-gradient(ellipse at 50% 100%, rgba(254, 240, 138, 0.55), rgba(56, 189, 248, 0.25) 45%, transparent 75%);
+    clip-path: polygon(32% 100%, 68% 100%, 100% 0%, 0% 0%);
+    filter: blur(4px);
+  }
+
+  .loco-underglow {
+    box-shadow: 0 0 35px 12px rgba(56, 189, 248, 0.45);
+  }
+
+  .spark {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #fed7aa;
+    box-shadow: 0 0 8px #fb923c, 0 0 14px #ea580c;
+    pointer-events: none;
+    animation: sparkAnim 0.65s linear forwards;
+  }
+
+  @keyframes sparkAnim {
+    0% {
+      transform: translate(0, 0) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx, 15px), var(--ty, 15px)) scale(0.2);
+      opacity: 0;
+    }
+  }
+
+  .radar-sweep {
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(56, 189, 248, 0.45) 60deg, transparent 70deg);
+    border-radius: 50%;
+    animation: radarSpin 2.5s linear infinite;
+  }
+
+  @keyframes radarSpin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .tilt-card {
+    perspective: 1200px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .tilt-card-inner {
+    background: rgba(15, 25, 45, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 1rem;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .tilt-card:hover .tilt-card-inner {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.35);
+  }
+
+  .shimmer-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: rotate(25deg) translateY(-120%);
+    animation: btnShimmer 4s infinite ease-in-out;
+  }
+
+  @keyframes btnShimmer {
+    0%, 65% {
+      transform: rotate(25deg) translateY(-120%);
+    }
+    100% {
+      transform: rotate(25deg) translateY(120%);
+    }
+  }
+
+  /* Custom scrollbar */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Night Sky Cosmic Background & Glassmorphic Constitution */
+  .night-sky-bg {
+    background-color: #030714;
+    background-image: 
+      radial-gradient(1px 1px at 25px 35px, #ffffff, rgba(0, 0, 0, 0)),
+      radial-gradient(1.5px 1.5px at 150px 80px, #a5b4fc, rgba(0, 0, 0, 0)),
+      radial-gradient(1px 1px at 90px 170px, #ffffff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 280px 220px, #7dd3fc, rgba(0, 0, 0, 0)),
+      radial-gradient(1px 1px at 420px 90px, #ffffff, rgba(0, 0, 0, 0)),
+      radial-gradient(1.5px 1.5px at 600px 310px, #fbcfe8, rgba(0, 0, 0, 0)),
+      radial-gradient(1px 1px at 750px 140px, #ffffff, rgba(0, 0, 0, 0)),
+      radial-gradient(2px 2px at 900px 280px, #93c5fd, rgba(0, 0, 0, 0)),
+      radial-gradient(1px 1px at 1050px 70px, #ffffff, rgba(0, 0, 0, 0)),
+      radial-gradient(1.5px 1.5px at 1200px 200px, #fed7aa, rgba(0, 0, 0, 0)),
+      radial-gradient(ellipse 95% 65% at 50% -10%, rgba(29, 78, 216, 0.28), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 90% 70%, rgba(245, 158, 11, 0.12), transparent 60%),
+      radial-gradient(ellipse 65% 45% at 10% 40%, rgba(14, 165, 233, 0.16), transparent 55%),
+      radial-gradient(circle at 50% 90%, rgba(30, 58, 138, 0.22), transparent 70%);
+    background-attachment: fixed;
+    background-repeat: repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 350px 350px, 420px 420px, 500px 500px, 580px 580px, 650px 650px, 720px 720px, 800px 800px, 920px 920px, 1050px 1050px, 1200px 1200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  }
+
+  .glass-panel {
+    background: rgba(8, 18, 38, 0.78);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    box-shadow: 0 16px 45px -12px rgba(0, 0, 0, 0.75), 0 0 25px -5px rgba(56, 189, 248, 0.12);
+  }
+
+  .glass-panel-subtle {
+    background: rgba(12, 25, 52, 0.58);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  .glass-card {
+    background: rgba(10, 22, 46, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.6);
+    transition: all 0.25s ease;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(56, 189, 248, 0.35);
+    box-shadow: 0 16px 45px -10px rgba(14, 165, 233, 0.22);
+  }
+
+  .glass-input {
+    background: rgba(5, 12, 28, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    transition: all 0.2s ease;
+  }
+
+  .glass-input:focus {
+    border-color: rgba(56, 189, 248, 0.7);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.22);
+    background: rgba(7, 16, 38, 0.95);
+  }
+
+  .glass-chip {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+}
